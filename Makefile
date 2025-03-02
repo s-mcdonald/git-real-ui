@@ -64,10 +64,10 @@ endif
 %.o:%.c
 	$(CXX) $(CXXFLAGS) -c -o $@ $<
 
-%.o:$(VENDOR_DIR)/*/*.c
+%.o:$(VENDOR_DIR)/*/%.c
 	$(CXX) $(CXXFLAGS) -c -o $@ $<
 
-%.o:$(VENDOR_DIR)/*/cpp/*.cpp
+%.o:$(VENDOR_DIR)/*/cpp/%.cpp
 	$(CXX) $(CXXFLAGS) -c -o $@ $<	
 
 %.o:$(IMGUI_DIR)/%.cpp
@@ -76,7 +76,7 @@ endif
 %.o:$(INCLUDE_DIR)/gr/*.cpp
 	$(CXX) $(CXXFLAGS) -c -o $@ $<
 
-%.o:$(IMGUI_DIR)/backends/*.cpp
+%.o:$(IMGUI_DIR)/backends/%.cpp
 	$(CXX) $(CXXFLAGS) -c -o $@ $<
 
 all: $(TARGET)

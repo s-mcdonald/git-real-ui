@@ -111,11 +111,13 @@ int main(int, char**)
 
     // Load from the config for initial alpha dev
     // then we can create a File->open dialog later
-    std::string config_file = "./config.ini";
+    //GitReal::AppData::config_file_path;
 
-    std::string current_branch;
-    std::vector<std::string> branches;
-    std::vector<std::string> remotes;
+
+
+    GitReal::AppContext context;
+
+    // we need to build the context with the existing data we have before we continue.
 
 
     // Timer for periodic updates

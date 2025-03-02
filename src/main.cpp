@@ -21,6 +21,8 @@
 
 #include <GLFW/glfw3.h> // Will drag system OpenGL headers
 
+#include "gr-app.h"
+#include "gr-ui.h"
 
 
 // move to gloabls
@@ -78,7 +80,6 @@ int main(int, char**)
 
     // Create window with graphics context
     GLFWwindow* window = glfwCreateWindow(1280, 720, "Git // Real", nullptr, nullptr);
-    //GLFWwindow* window = glfwCreateWindow(1280, 720, Gr::App::GIT_REAL_APP_NAME, nullptr, nullptr);
     if (window == nullptr)
         return 1;
 
@@ -103,6 +104,10 @@ int main(int, char**)
     ///
     /// StateControl variables below
     ///
+
+    // get the app pref
+    auto g_app_pref = GitReal::Preferences();
+
 
     // Load from the config for initial alpha dev
     // then we can create a File->open dialog later
@@ -131,6 +136,8 @@ int main(int, char**)
         ImGui::PushStyleVar(ImGuiStyleVar_TabRounding, 0.0f);
 
         // Set the background color
+        auto rgba = GitReal::Preferences().backgroundColor;
+
         ImGui::PushStyleColor(ImGuiCol_WindowBg, ImVec4(0.012f, 0.173f, 0.259f, 0.90f));
 
         // ImGui Poll and handle events (inputs, window resize, etc.)
@@ -208,7 +215,13 @@ int main(int, char**)
         int display_w, display_h;
         glfwGetFramebufferSize(window, &display_w, &display_h);
         glViewport(0, 0, display_w, display_h);
-        glClear(GL_COLOR_BUFFER_BIT);
+        
+        //
+        // Eventually this will be independant of oGL
+        //
+        GitReal::Ui::update_clear_color(g_app_pref.backgroundColor);        
+
+
         ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 
         if (io.ConfigFlags & ImGuiConfigFlags_ViewportsEnable)

@@ -16,10 +16,14 @@ INCLUDE_DIR = ../../includes
 IMGUI_DIR = $(VENDOR_DIR)/ocornut/imgui
 
 
+# App Sources
 SOURCES = $(SRC_DIR)/main.cpp 
+SOURCES += $(INCLUDE_DIR)/gr/gr-app.cpp
+SOURCES += $(INCLUDE_DIR)/gr/gr-ui.cpp 
+
+# Vendor Sources
 SOURCES += $(VENDOR_DIR)/benhoyt/inih/ini.c
 SOURCES += $(VENDOR_DIR)/benhoyt/inih/cpp/INIReader.cpp
-
 SOURCES += $(IMGUI_DIR)/imgui.cpp $(IMGUI_DIR)/imgui_demo.cpp $(IMGUI_DIR)/imgui_draw.cpp $(IMGUI_DIR)/imgui_tables.cpp $(IMGUI_DIR)/imgui_widgets.cpp
 SOURCES += $(IMGUI_DIR)/backends/imgui_impl_glfw.cpp $(IMGUI_DIR)/backends/imgui_impl_opengl3.cpp
 
@@ -60,16 +64,19 @@ endif
 %.o:%.c
 	$(CXX) $(CXXFLAGS) -c -o $@ $<
 
-%.o:$(VENDOR_DIR)/%/%.c
+%.o:$(VENDOR_DIR)/*/*.c
 	$(CXX) $(CXXFLAGS) -c -o $@ $<
 
-%.o:$(VENDOR_DIR)/%/cpp/%.cpp
+%.o:$(VENDOR_DIR)/*/cpp/*.cpp
 	$(CXX) $(CXXFLAGS) -c -o $@ $<	
 
 %.o:$(IMGUI_DIR)/%.cpp
 	$(CXX) $(CXXFLAGS) -c -o $@ $<
 
-%.o:$(IMGUI_DIR)/backends/%.cpp
+%.o:$(INCLUDE_DIR)/gr/*.cpp
+	$(CXX) $(CXXFLAGS) -c -o $@ $<
+
+%.o:$(IMGUI_DIR)/backends/*.cpp
 	$(CXX) $(CXXFLAGS) -c -o $@ $<
 
 all: $(TARGET)

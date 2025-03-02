@@ -1,0 +1,29 @@
+#
+# Ide project files
+#
+/.vscode
+
+
+#
+# Just dont track binaries
+#
+/bin/*
+/bin/**/*
+!/bin/README.md
+
+
+# ensure not main file
+!/src/**
+
+
+#
+# Object files
+#
+*.o
+*/**/*.o
+
+
+#
+# Debian packages
+#
+
